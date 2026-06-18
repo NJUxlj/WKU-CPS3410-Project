@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Standalone script to generate TSP test data and run SA experiments."""
 import sys
-import os
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 print("=" * 70, flush=True)
 print("Simulated Annealing for TSP - Experiment Runner", flush=True)
@@ -17,8 +17,7 @@ from simulated_annealing.simulated_annealing import SimulatedAnnealing, SAResult
 print("  simulated_annealing OK", flush=True)
 
 # Generate data
-from pathlib import Path
-data_dir = Path(__file__).parent / "simulated_annealing" / "data"
+data_dir = Path(__file__).resolve().parent.parent / "simulated_annealing" / "data"
 data_dir.mkdir(parents=True, exist_ok=True)
 
 print("\n" + "=" * 70, flush=True)

@@ -1,10 +1,7 @@
 #!/usr/bin/env python3
 """Complete the SA report by adding sections 3-6."""
 from docx import Document
-from docx.shared import Inches, Pt, RGBColor
-from docx.enum.text import WD_ALIGN_PARAGRAPH
-from copy import deepcopy
-import os
+from docx.shared import Pt
 
 # Load the original document
 doc_path = '/Users/xiniuyiliao/Desktop/application_code/WKU-CPS3410-Project/StimulatedAnnealingAlgorithm(1).docx'

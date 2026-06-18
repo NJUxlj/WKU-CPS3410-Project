@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Replace markdown-style text tables with proper Word tables."""
 from docx import Document
-from docx.shared import Pt, RGBColor
+from docx.shared import Pt
 from docx.oxml.ns import qn
 from docx.oxml import OxmlElement
 import re

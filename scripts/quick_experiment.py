@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Quick experiment to collect data for the SA report tables."""
-import sys, os, time
-sys.path.insert(0, '/Users/xiniuyiliao/Desktop/application_code/WKU-CPS3410-Project')
+import sys, time
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 import numpy as np
 from simulated_annealing.tsp_instance import TSPInstance
@@ -9,8 +10,8 @@ from simulated_annealing.simulated_annealing import SimulatedAnnealing
 
 def load_or_create(name, n_cities, seed):
     """Load instance or use known parameters."""
-    path = f'simulated_annealing/data/distances_between_cities_{n_cities}.txt'
-    inst = TSPInstance.load(path)
+    path = Path(__file__).resolve().parent.parent / f'simulated_annealing/data/distances_between_cities_{n_cities}.txt'
+    inst = TSPInstance.load(str(path))
     return inst
 
 def run_quality_stability(inst, cooling_rate, n_runs, max_iter_per_temp, seed):

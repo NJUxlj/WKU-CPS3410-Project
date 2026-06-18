@@ -1,16 +1,16 @@
 #!/usr/bin/env python3
 """Simplified full experiment for SA on TSP - 2-opt only, all key metrics."""
-import sys, os, time
-sys.path.insert(0, '/Users/xiniuyiliao/Desktop/application_code/WKU-CPS3410-Project')
+import sys, time
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 import numpy as np
 from simulated_annealing.tsp_instance import TSPInstance, find_optimal_brute_force
 from simulated_annealing.simulated_annealing import SimulatedAnnealing
-from pathlib import Path
 
-data_dir = Path('/Users/xiniuyiliao/Desktop/application_code/WKU-CPS3410-Project/simulated_annealing/data')
+data_dir = Path(__file__).resolve().parent.parent / 'simulated_annealing' / 'data'
 data_dir.mkdir(parents=True, exist_ok=True)
-results_dir = Path('/Users/xiniuyiliao/Desktop/application_code/WKU-CPS3410-Project/simulated_annealing/results')
+results_dir = Path(__file__).resolve().parent.parent / 'simulated_annealing' / 'results'
 results_dir.mkdir(parents=True, exist_ok=True)
 
 # =========================================================
