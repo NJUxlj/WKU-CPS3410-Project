@@ -27,6 +27,7 @@ class SAResult:
     iteration_count: int
     elapsed_time: float
     converged: bool
+    unique_tours_explored: int = 0   # # of distinct tours visited
 
 
 @dataclass
@@ -266,6 +267,8 @@ class SimulatedAnnealing:
         cost_history = []
         temp_history = []
         acceptance_history = []
+        tracked_tours: set = set()
+        tracked_tours.add(tuple(current_tour))
 
         while temperature > self.min_temp:
             accepted = 0
@@ -301,6 +304,7 @@ class SimulatedAnnealing:
                     current_tour = new_tour
                     current_cost += delta
                     accepted += 1
+                    tracked_tours.add(tuple(current_tour))
 
                     if current_cost < best_cost:
                         best_cost = current_cost
@@ -318,6 +322,7 @@ class SimulatedAnnealing:
                         current_tour = new_tour
                         current_cost += delta
                         accepted += 1
+                        tracked_tours.add(tuple(current_tour))
                         stuck_count += 1
                     else:
                         stuck_count += 1
@@ -356,7 +361,8 @@ class SimulatedAnnealing:
             acceptance_history=acceptance_history,
             iteration_count=iteration,
             elapsed_time=elapsed,
-            converged=(temperature <= self.min_temp)
+            converged=(temperature <= self.min_temp),
+            unique_tours_explored=len(tracked_tours)
         )
 
     def run_with_adaptive_params(self, verbose: bool = False) -> SAResult:
@@ -381,6 +387,8 @@ class SimulatedAnnealing:
         cost_history = []
         temp_history = []
         acceptance_history = []
+        tracked_tours: set = set()
+        tracked_tours.add(tuple(current_tour))
 
         while temperature > self.min_temp:
             accepted = 0
@@ -410,6 +418,7 @@ class SimulatedAnnealing:
                     current_tour = new_tour_cache
                     current_cost += delta
                     accepted += 1
+                    tracked_tours.add(tuple(current_tour))
                     if current_cost < best_cost:
                         best_cost = current_cost
                         best_tour = current_tour.copy()
@@ -425,6 +434,7 @@ class SimulatedAnnealing:
                         current_tour = new_tour_cache
                         current_cost += delta
                         accepted += 1
+                        tracked_tours.add(tuple(current_tour))
                         stuck_count += 1
                     else:
                         stuck_count += 1
@@ -459,5 +469,6 @@ class SimulatedAnnealing:
             acceptance_history=acceptance_history,
             iteration_count=iteration,
             elapsed_time=elapsed,
-            converged=(temperature <= self.min_temp)
+            converged=(temperature <= self.min_temp),
+            unique_tours_explored=len(tracked_tours)
         )
